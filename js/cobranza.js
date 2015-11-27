@@ -423,6 +423,7 @@ function onSuccess3(data)
                 }
         
         dibujar3(datos9,ancho,grafica3);
+        document.getElementById('table-p').style.display = 'block';
         dibujar6(datos10,ancho);
         
         
