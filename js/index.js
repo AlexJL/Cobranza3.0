@@ -720,15 +720,15 @@ function onSuccess10(data)
         var k = 0;
         for(var i=0;i<data.length;i++)
             {
-                if(data.charAt(i)!= "|" && k<4)
+                if(data.charAt(i)!= "|" && k<5)
                     {
                         cad = cad + data.charAt(i);
                     }
-                else if(data.charAt(i) != "$" && k >= 4)
+                else if(data.charAt(i) != "$" && k >= 5)
                     {
                         cad1 = cad1 + data.charAt(i);
                     }
-                else if(data.charAt(i) == "|" && k<4)
+                else if(data.charAt(i) == "|" && k<5)
                     {
                         fechas[cont] = cad;
                         cont++;
@@ -736,7 +736,7 @@ function onSuccess10(data)
                         k++;
                         cad = "";
                     }
-                else if(data.charAt(i) == "$" && k>=4)
+                else if(data.charAt(i) == "$" && k>=5)
                     {
                         facturacion[cont1] = cad1;
                         cont1++;
