@@ -284,6 +284,8 @@ function verEmpresa()
             });
     document.getElementById("fecha-cob").style.width = '38%';
     document.getElementById("monto-cob").style.width = '30%';
+    document.getElementById("monto-cob").innerHTML = obtenerValor1(montoComparado);
+    
     
 }
 
