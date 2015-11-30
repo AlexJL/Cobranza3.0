@@ -6,7 +6,7 @@ var cobranzaRegular =  new Array();
  var datos16;
  var dato45;
 var dato46;
-function verCF()
+/*function verCF()
 {
     $("#LoadingImage2").show();
     $.ajax({
@@ -112,7 +112,7 @@ function onSuccess1(data)
         $("#btns").show();
     }
     
-}
+}*/
 
 function graficarMontos()
 {
@@ -633,7 +633,6 @@ function colocar1(valor, cad, cad1)
             cadena = "DICIEMBRE - ";
         }
     
-    cad1 = "20"+cad1;
     cadena = cadena + cad1;
     var variable2 = new Option(cadena,"value","defaultSelected");
     document.getElementById("myselect4").options[valor] = variable2;
@@ -644,6 +643,8 @@ function ingresoUsuarioValido()
     var name=document.getElementById('txt-email').value;
     name = name.toUpperCase();
     var pass = document.getElementById('txt-pass').value;
+    localStorage.setItem("nombre",name);
+    localStorage.setItem("contrasenia",pass);
     $.ajax({
             type: "POST",
             url: "http://land.sedalib.com.pe/moviles/cobranza/login.php",

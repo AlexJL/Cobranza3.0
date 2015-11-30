@@ -25,7 +25,7 @@
             var verificar = 0;
         </script>    
         <script type="text/javascript">
-                     function onLoad()
+            function onLoad()
             {
                   document.addEventListener("deviceready", onDeviceReady, true);
             }
@@ -34,6 +34,21 @@
              {
                 navigator.app.exitApp();
              }
+            
+            function onDeviceReady() {
+                document.addEventListener("backbutton", handleBackButton, true);
+            }
+            
+            function handleBackButton(){
+                if($.mobile.activePage.attr('id') == 'login'
+                          || $.mobile.activePage.attr('id') == 'inicio'){
+                    navigator.app.exitApp();
+                }else if ($.mobile.activePage.attr('id') == 'facturacion'){
+                    $.mobile.changePage('#inicio');
+                }else{
+                    navigator.app.backHistory();
+                }
+            }
 
                 </script>
     </head>
@@ -47,6 +62,13 @@
             <div id="form" >
                  <input id="txt-email" data-role="none" name="username" type="text" tabindex="1" placeholder="usuario" required>
                  <input id="txt-pass" data-role="none" name="userpass" type="password" tabindex="2" placeholder="Contraseña" required>
+                <script>
+                    if(localStorage.getItem('nombre') != "")
+                        {
+                            document.getElementById("txt-email").value = localStorage.getItem('nombre');
+                            document.getElementById("txt-pass").value = localStorage.getItem('contrasenia');
+                        }
+                </script>
                  <button data-role="none"  id="login-button" value="Login" onclick="ingresoUsuarioValido()" ><a id="login-entrar">Login</a></button>
             </div>
     </div>
