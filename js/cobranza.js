@@ -269,7 +269,7 @@ function verEmpresa()
     else{
          var dia2 = verificarDia(1);
         mesinicio = "01"+"/"+datos4[0][1];
-         mesfinal1 = dia2+"/"+datos4[0][1];
+         mesfinal = dia2+"/"+datos4[0][1];
         montoComparado = localStorage.getItem('cobraMes1');
     }
     
@@ -282,9 +282,11 @@ function verEmpresa()
             dataType: "text",
             success: onSuccess3
             });
+    localStorage.setItem('mes11', mesinicio);
+    localStorage.setItem('mes21', mesfinal);
     document.getElementById("fecha-cob").style.width = '38%';
     document.getElementById("monto-cob").style.width = '30%';
-    document.getElementById("monto-cob").innerHTML = obtenerValor1(montoComparado);
+   
     
     
 }
@@ -372,7 +374,8 @@ function onSuccess3(data)
                         }
                 }
         
-        
+         document.getElementById('fecha-cob').innerHTML = "DEL "+localStorage.getItem('mes11') + "<br>\nAL " + localStorage.getItem('mes21');
+    document.getElementById("monto-cob").innerHTML = obtenerValor1(montoComparado);
         var datos9 = new google.visualization.DataTable();
                 datos9.addColumn('string','Empresa');
                 datos9.addColumn('number','Montos');
