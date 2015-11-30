@@ -117,7 +117,7 @@ function onSuccess1(data)
 function graficarMontos()
 {
     var ancho= $(window).width();
-    ancho = ancho;
+    ancho = ancho - 40;
     if(verificar == 1)
         {
     var grafica;
@@ -720,15 +720,15 @@ function onSuccess10(data)
         var k = 0;
         for(var i=0;i<data.length;i++)
             {
-                if(data.charAt(i)!= "|" && k<5)
+                if(data.charAt(i)!= "|" && k<4)
                     {
                         cad = cad + data.charAt(i);
                     }
-                else if(data.charAt(i) != "$" && k >= 5)
+                else if(data.charAt(i) != "$" && k >= 4)
                     {
                         cad1 = cad1 + data.charAt(i);
                     }
-                else if(data.charAt(i) == "|" && k<5)
+                else if(data.charAt(i) == "|" && k<4)
                     {
                         fechas[cont] = cad;
                         cont++;
@@ -736,7 +736,7 @@ function onSuccess10(data)
                         k++;
                         cad = "";
                     }
-                else if(data.charAt(i) == "$" && k>=5)
+                else if(data.charAt(i) == "$" && k>=4)
                     {
                         facturacion[cont1] = cad1;
                         cont1++;
