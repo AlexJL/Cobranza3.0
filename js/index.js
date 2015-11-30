@@ -199,11 +199,11 @@ function graficarMontos1()
         var x1=document.getElementById('myselect1').selectedIndex;
         if(x1 == 0)
             {
-                grafica =   new  google.visualization.ColumnChart(document.getElementById('charts1'));
+                grafica =   new  google.visualization.BarChart(document.getElementById('charts1'));
             }
         else if(x1 == 1)
             {
-                grafica =   new  google.visualization.BarChart(document.getElementById('charts1'));
+                grafica =   new  google.visualization.ColumnChart(document.getElementById('charts1'));
             }
         else if(x1 == 2)
             {
@@ -643,7 +643,7 @@ function ingresoUsuarioValido()
     var name=document.getElementById('txt-email').value;
     name = name.toUpperCase();
     var pass = document.getElementById('txt-pass').value;
-    localStorage.setItem("nombre",name);
+    localStorage.setItem("nombre1",name);
     localStorage.setItem("contrasenia",pass);
     $.ajax({
             type: "POST",

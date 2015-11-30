@@ -63,9 +63,9 @@
                  <input id="txt-email" data-role="none" name="username" type="text" tabindex="1" placeholder="usuario" required>
                  <input id="txt-pass" data-role="none" name="userpass" type="password" tabindex="2" placeholder="Contraseña" required>
                 <script>
-                    if(localStorage.getItem('nombre') != "")
+                    if(localStorage.getItem('nombre1') != "")
                         {
-                            document.getElementById("txt-email").value = localStorage.getItem('nombre');
+                            document.getElementById("txt-email").value = localStorage.getItem('nombre1');
                             document.getElementById("txt-pass").value = localStorage.getItem('contrasenia');
                         }
                 </script>
@@ -105,8 +105,8 @@
                 <hr style="border:none;background:#296fb7;height:1px">
                 <center id="sub-botones">
                     <i class="txt-slect" >Seleccione un Gráfico</i><select id="myselect1" data-role="none">
-                        <option value="Grafico Columnas">Gráfico Columnas</option>
-                        <option value="Grafico Barras">Gráfico Barras</option>
+                        <option value="Grafico Columnas">Gráfico Barras</option>
+                        <option value="Grafico Barras">Gráfico Columnas</option>
                         <option value="Grafico Combo">Gráfico Combo</option>
                         <option value="Grafico Area">Gráfico Area</option>
                         <option value="Grafico Line">Gráfico Linea</option>
@@ -127,10 +127,10 @@
                     function dibujar3(datos4,ancho,grafica)
                     {   
                         var datos = datos4;
-                        var ancho3 = ancho+50;
+                        var ancho3 = ancho;
                         var grafica = grafica;
                         var opciones = {'title':'Facturación y Cobranza',
-                                        'width':ancho,
+                                        'width':ancho3,
                                         'backgroundColor':'#eee',
                                         'height':300,
                                         colors: ['#4285F4','#DB4437','#F4B400']};          
