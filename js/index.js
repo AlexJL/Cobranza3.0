@@ -199,11 +199,11 @@ function graficarMontos1()
         var x1=document.getElementById('myselect1').selectedIndex;
         if(x1 == 0)
             {
-                grafica =   new  google.visualization.BarChart(document.getElementById('charts1'));
+                grafica =   new  google.visualization.ColumnChart(document.getElementById('charts1'));
             }
         else if(x1 == 1)
             {
-                grafica =   new  google.visualization.ColumnChart(document.getElementById('charts1'));
+                grafica =   new  google.visualization.BarChart(document.getElementById('charts1'));
             }
         else if(x1 == 2)
             {
@@ -445,7 +445,7 @@ function colocar2(cad, cad1)
         {
             cadena = "DIC - ";
         }
-    cad1 = "20"+cad1;
+    cad1 = cad1;
     cadena = cadena + cad1;
     return cadena;
 }
