@@ -9,6 +9,10 @@ function verDocumento()
     if(x1 == 0)
         {
             var dia = f1.getDate();
+            if(dia<10)
+                {
+                    dia = "0"+dia;
+                }
             mesfinal1 = dia+"/"+datos4[0][1];
             mesinicio1 = "01"+"/"+datos4[0][1];
             montoComparado = localStorage.getItem('cobraMes'+String(x1+1));
@@ -36,6 +40,10 @@ function verDocumento()
         }
     else{
         var dia2 = verificarDia(1);
+        if(dia2<10)
+                {
+                    dia2 = "0"+dia2;
+                }
         mesinicio1 = "01"+"/"+datos4[0][1];
         mesfinal1 = dia2+"/"+datos4[0][1];
         montoComparado = localStorage.getItem('cobraMes1');
@@ -169,7 +177,7 @@ function onSuccess2(data)
                 }
             
             document.getElementById('fecha-cob').innerHTML = "DEL "+localStorage.getItem('mes1') + "<br>\nAL " + localStorage.getItem('mes2');
-            document.getElementById("monto-cob").innerHTML = obtenerValor1(montoComparado);
+            document.getElementById("monto-cob").innerHTML = "S./ " +obtenerValor1(montoComparado);
             
             var datos6 = new google.visualization.DataTable();
                 datos6.addColumn('string','Documentos');
@@ -224,9 +232,10 @@ function onSuccess2(data)
                     grafica3 =  new  google.visualization.ColumnChart(document.getElementById('charts2'));   
                 }
             
-            dibujar3(datos6,ancho,grafica3);
+            dibujar3234(datos6,ancho,grafica3,"Cobranza por Documento");
             dibujar6(datos7,ancho);
             document.getElementById('table-p').style.display = 'block';
+            $("#leyenda8").show();
         }
 }
 
@@ -241,6 +250,10 @@ function verEmpresa()
     if(x == 0)
         {
             var dia = f1.getDate();
+            if(dia<10)
+                {
+                    dia = "0"+dia;
+                }
             mesfinal = dia+"/"+datos4[0][1];
             mesinicio = "01"+"/"+datos4[0][1];
             montoComparado = localStorage.getItem('cobraMes'+String(x+1));
@@ -268,6 +281,10 @@ function verEmpresa()
         }
     else{
          var dia2 = verificarDia(1);
+        if(dia2<10)
+                {
+                    dia2 = "0"+dia2;
+                }
         mesinicio = "01"+"/"+datos4[0][1];
          mesfinal = dia2+"/"+datos4[0][1];
         montoComparado = localStorage.getItem('cobraMes1');
@@ -375,7 +392,7 @@ function onSuccess3(data)
                 }
         
          document.getElementById('fecha-cob').innerHTML = "DEL "+localStorage.getItem('mes11') + "<br>\nAL " + localStorage.getItem('mes21');
-    document.getElementById("monto-cob").innerHTML = obtenerValor1(montoComparado);
+    document.getElementById("monto-cob").innerHTML = "S./ "+ obtenerValor1(montoComparado);
         var datos9 = new google.visualization.DataTable();
                 datos9.addColumn('string','Empresa');
                 datos9.addColumn('number','Montos');
@@ -425,21 +442,25 @@ function onSuccess3(data)
                     grafica3 =  new  google.visualization.ColumnChart(document.getElementById('charts2'));   
                 }
         
-        dibujar3(datos9,ancho,grafica3);
+        dibujar3234(datos9,ancho,grafica3,'Cobranza por Empresa');
         document.getElementById('table-p').style.display = 'block';
+        $("#leyenda8").show();
         dibujar6(datos10,ancho);
         
         
     }
 }
 
-function dibujar3(valor,x,y)
+function dibujar3234(valor,x,y,k)
 {
     var grafica2 = y;
-    var ancho1 = x;
+    var ancho1 = x+50;
     var datos1= valor;
-    var opciones = {'title':'Cobranza por Documento',
+    var opciones = {'title':k,
                     'width':ancho1,
+                    backgroundColor:'#FFF',
+                    legend:{position: 'none'},
+                    colors:['#CDDC39'],
                     'height':400};     
     grafica2.draw(datos1,opciones);
 }
@@ -448,7 +469,7 @@ function dibujar6(valor,x)
 {
     var ancho2 = x;
     var datos2 = valor;
-    var opciones = {'title':'cobranza por Documento',
+    var opciones = {'title':'Cobranza por Documento',
                     'width':ancho2,
                     'height':300};          
     var grafica =   new  google.visualization.Table(document.getElementById('table3'));

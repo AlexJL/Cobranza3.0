@@ -6,6 +6,7 @@ var cobranzaRegular =  new Array();
  var datos16;
  var dato45;
 var dato46;
+var ayuda1223;
 /*function verCF()
 {
     $("#LoadingImage2").show();
@@ -165,9 +166,9 @@ function graficarMontos()
                             ]);
                     }
             
-       // alert(datos16[2][0]);
-            
         dibujar3(datos3,ancho,grafica);
+            
+            
             var datos13 = new google.visualization.DataTable();
                 datos13.addColumn('string','Mes');
                 datos13.addColumn('string','Facturacion');
@@ -238,15 +239,34 @@ function graficarMontos1()
                             [datos16[2][j-1],datos4[1][j],datos4[2][j]]
                             ]);
                     }
-            
-       // alert(datos16[2][0]);
-            var ayuda1223 = new Array(tam1);
+
+            ayuda1223 = new Array(tam1);            
             for(var i = 0;i <tam1;i++)
                 {
                     ayuda1223[i] = cargarMeses3(datos4[0][i+1]);
                 }
             
         dibujar3(datos3,ancho,grafica);
+            
+            document.getElementById('Mes_1').innerHTML = ayuda1223[0];
+            document.getElementById('Mes_2').innerHTML = ayuda1223[1];
+            document.getElementById('Mes_3').innerHTML = ayuda1223[1];
+            document.getElementById('Mes_4').innerHTML = ayuda1223[2];
+            document.getElementById('Mes_5').innerHTML = ayuda1223[0];
+            document.getElementById('Mes_6').innerHTML = ayuda1223[3];
+            document.getElementById('Monto_1').innerHTML = datos16[1][0];
+            document.getElementById('Monto_2').innerHTML = datos16[1][1];
+            document.getElementById('Monto_3').innerHTML = datos16[1][1];
+            document.getElementById('Monto_4').innerHTML = datos16[1][2];
+            document.getElementById('Monto_5').innerHTML = datos16[1][0];
+            document.getElementById('Monto_6').innerHTML = datos16[1][3];
+            
+            document.getElementById('diferencia_1').innerHTML = obtenerValor1(String((Math.round((datos4[2][1]-datos4[2][2])*100))/100));
+            document.getElementById('diferencia_2').innerHTML = obtenerValor1(String((Math.round((datos4[2][2]-datos4[2][3])*100))/100));
+            document.getElementById('diferencia_3').innerHTML = obtenerValor1(String((Math.round((datos4[2][1]-datos4[2][4])*100))/100));
+            
+            
+            
             var datos13 = new google.visualization.DataTable();
                 datos13.addColumn('string','Mes');
                 datos13.addColumn('string','Facturacion');
@@ -722,7 +742,7 @@ function colocar1(valor, cad, cad1)
             cadena = "DICIEMBRE - ";
         }
     
-    cadena = cadena + cad1;
+    cadena = cadena + "20"+cad1;
     var variable2 = new Option(cadena,"value","defaultSelected");
     document.getElementById("myselect4").options[valor] = variable2;
 }
@@ -779,6 +799,8 @@ function VerFacturas()
 {
     $("#btns").hide();
     $('#charts1').hide();
+    $('#tabla342').hide();
+    $('#leyenda5').hide();
     $('#table2').hide();
     $("#LoadingImage2").show();
     $.ajax({
@@ -897,6 +919,8 @@ function onSuccess11(data)
     $("#LoadingImage2").hide();
     $("#tipo-moneda").show();
     $("#charts1").show();
+    $("#leyenda5").show();
+    $("#tabla342").show();
     $("#table2").show();
 }
 

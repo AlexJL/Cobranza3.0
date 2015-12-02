@@ -7,6 +7,8 @@ function verPorfechas()
     
     $("#charts1").hide();
     $("#table2").hide();
+    $("#tabla342").hide();
+    $("#leyenda5").hide();
     $("#LoadingImage2").show();
     $("#btns").hide();
     var date1 = new Date();
@@ -57,6 +59,7 @@ function verPorfechas()
         dataType: "text",
         success: onSuccess50 
     });
+    
 }
 
 function onSuccess50(data)
@@ -169,15 +172,18 @@ function dibujar34(x,y,z)
 {
     var dia = new Date();
     var d = dia.getDate();
-    var opciones = {'title':'FACTURACIÓN Y COBRANZA AL '+ d + " DE CADA MES",
-                    'width':y,
-                    'backgroundColor':'#eee',
-                    'height':300,
+    var opciones = {title:'FACTURACIÓN Y COBRANZA AL '+ d + " DE CADA MES",
+                    width:y+50,
+                    backgroundColor:'#F6F6F6',
+                    legend:{position: 'none'},
+                    height:300,
                     colors: ['#4285F4','#DB4437','#F4B400']};          
     z.draw(x,opciones);
     $("#LoadingImage2").hide();
     $("#charts1").show();
+    $("#leyenda5").show();
     $("#btns").show();
+    
 }
 
 function graficarMonto3(x)

@@ -45,6 +45,12 @@
                     navigator.app.exitApp();
                 }else if ($.mobile.activePage.attr('id') == 'facturacion'){
                     $.mobile.changePage('#inicio');
+                }else if ($.mobile.activePage.attr('id') == 'cobranza'){
+                    $.mobile.changePage('#inicio');
+                }else if ($.mobile.activePage.attr('id') == 'cobranzaxEmpresa'){
+                    $.mobile.changePage('#inicio');
+                }else if ($.mobile.activePage.attr('id') == 'detalles-cobranza'){
+                    $.mobile.changePage('#inicio');
                 }else{
                     navigator.app.backHistory();
                 }
@@ -121,13 +127,58 @@
                     <img src="img/cargando.GIF" />
             </div></center>
                 <div id="charts1"></div>
-                
+                <center>
+                <div id="leyenda5" style="display:none">
+                    <i><button data-role="none" id="btn-grafica"></button><i class="grafica-ley">FACTURACIÓN</i></i>
+                    <i><button data-role="none" id="btn-grafica1"></button><i class="grafica-ley">COBRANZA</i></i>
+                </div>
+                    </center>
+                <div id="tabla342" style="display:none;">
+                    <table id="table09" style="width:100%;MARGIN-TOP: 10PX;">
+                        <tr>
+                            <th>MES</th>
+                            <th id="Mes_1"></th>
+                            <th id="Mes_2"></th>
+                            <th> DIFERENCIA</th>
+                        </tr>
+                        <tr id="fila-2">
+                            <th>MONTO</th>
+                            <th id="Monto_1"></th>
+                            <th id="Monto_2"></th>
+                            <th id="diferencia_1"></th>
+                        </tr>
+                        <tr>
+                            <th>MES</th>
+                            <th id="Mes_3"></th>
+                            <th id="Mes_4"></th>
+                            <th> DIFERENCIA</th>
+                        </tr>
+                        <tr id="fila-4">
+                            <th>MONTO</th>
+                            <th id="Monto_3"></th>
+                            <th id="Monto_4"></th>
+                            <th id="diferencia_2"></th>
+                        </tr>
+                        <tr>
+                            <th>MES</th>
+                            <th id="Mes_5"></th>
+                            <th id="Mes_6"></th>
+                            <th> DIFERENCIA</th>
+                        </tr>
+                        <tr id="fila-6">
+                            <th>MONTO</th>
+                            <th id="Monto_5"></th>
+                            <th id="Monto_6"></th>
+                            <th id="diferencia_3"></th>
+                        </tr>
+                    </table>
+                </div>
                 <div id="table2"></div>
                 <script>
                     function dibujar3(datos4,ancho,grafica)
                     {   
                         var datos = datos4;
-                        var ancho3 = ancho;
+                        var ancho3 = ancho+70;
                         var grafica = grafica;
                         var opciones = {title:'Facturación y Cobranza',
                                         width: ancho3,
@@ -192,22 +243,37 @@
                 
                 <div id="charts"></div>
                 <script>                                    
-                function dibujar(datos,ancho,grafica1)
+                function dibujar76(datos,ancho,grafica1)
                 {
                     var grafica2 = grafica1;
-                    var ancho1 = ancho;
+                    var ancho1 = ancho+50;
                     var datos1= datos;
-                    var opciones = {'title':'Cantidades por Documento',
-                                    'width':ancho1,
-                                    'height':400};     
+                    var opciones = {title:'Facturación por Documento',
+                                    width:ancho1,
+                                    height:400,
+                                    backgroundColor:'#FFF',
+                                    colors:['#009688'],
+                                    legend:{position: 'none'}};     
                     grafica2.draw(datos1,opciones);
                 }
 
                 </script>
-                    
+                <center>
+                <div id="leyenda7" style="display:none">
+                    <i><button data-role="none" id="btn-grafica5"></button><i class="grafica-ley">FACTURACIÓN DOCUMENTOS</i></i>
+                </div>
+                <div>
+                    <table id="total-fac" style="display:none;">
+                        <tr>
+                            <th style="padding:7px">Total :</th>
+                            <th id="mont-12">S./ <i id="monto-facturado"></i></th>
+                        </tr>
+                    </table>
+                </div>    
+                </center>
                 <div id="table1"></div>       
                 <script>
-                    function dibujar1(datos,ancho)
+                    function dibujar176(datos,ancho)
                     {
                         var ancho2 = ancho;
                         var datos2 = datos;
@@ -219,7 +285,7 @@
                     }
                 
                 </script>
-                
+                <div id="nota" style="display:none">*Las Iniciales de Convenión no son parte de la Facturación</div>
             </div>
             <!--<div data-role="footer" data-position="fixed">
                 <h3 class="foot">SEDALIB S.A. &copy; 2015</h3>
@@ -258,6 +324,11 @@
                 <img src="img/ajax-loader.gif" />
             </div></center>
                 <div id="charts2"></div>
+                <center>
+                    <div id="leyenda8" style="display:none">
+                    <i><button data-role="none" id="btn-grafica6"></button><i class="grafica-ley">COBRANZA</i></i>
+                    </div>
+                </center>
                 <div id="table-p" style="display:none">
                     <table style="width:100%;MARGIN-TOP: 20PX;">
                         <tr>
@@ -281,14 +352,23 @@
         </div>
             <div data-role="content">
                 <center>
-                <button data-role="none" class="btn-detalles" onclick="actualiza()">Actualizar</button>
-                <button data-role="none" class="btn-detalles" onclick="grafica()">Graficar</button></center>
+                <button data-role="none" class="btn-detalles" onclick="actualiza()">
+                    <img class="img-emp" src="img/atualizar.png">Actualizar</button>
+                <button data-role="none" class="btn-detalles" onclick="grafica()">
+                    <img class="img-emp" src="img/redibujar.png">Graficar</button></center>
                 <hr id="separador-detalles">
                 <center><div id="LoadingImage4" style="display: none">
                 <img src="img/ajax-loader.gif" /><br>
                     <img src="img/cargando.GIF" />
             </div></center>
                 <div id="charts3"></div>
+                <center>
+                <div id="leyenda6" style="display:none">
+                    <i><button data-role="none" id="btn-grafica2"></button><i class="grafica-ley">FACTURACIÓN</i></i>
+                    <i><button data-role="none" id="btn-grafica3"></button><i class="grafica-ley">RCAUDACIÓN</i></i>
+                    <i><button data-role="none" id="btn-grafica4"></button><i class="grafica-ley">C.REAL</i></i>
+                </div>
+                </center>
                 <div id="tabla7"></div>
             </div>
         </div>
@@ -305,15 +385,24 @@
                         <option value="">Gráfico Bar</option>
                         <option value="">Gráfico Áreas</option>
                         <option value="">Gráfico Lineas</option>
-                    </select><button data-role="none" id="btn-redibujar" onclick="redibujar()">Dibujar</button>
+                    </select><button data-role="none" id="btn-redibujar" onclick="redibujar()">
+                            <img class="img-emp" src="img/redibujar.png">Dibujar
+                            </button>
             </center>
             <hr style="height:1px; background:#296fb7;border:none">
             <center>
-                <button id="btn233" data-role="none" onclick="empresasPorFechas()">Por Fechas</button>
-                <button id="btn234" data-role="none" onclick="empresasMensual()">Mensual</button>
+                <button id="btn233" data-role="none" onclick="empresasPorFechas()">
+                    <img class="img-emp" src="img/dia.png">Por Fechas</button>
+                <button id="btn234" data-role="none" onclick="empresasMensual()">
+                    <img class="img-emp" src="img/mes.png">Mensual</button>
             </center>
             <hr style="height:1px; background:#296fb7;border:none">
             <div id="charts6"></div>
+            <center>
+                <div id="leyenda9" style="display:none">
+                <i><button data-role="none" id="btn-grafica7"></button><i class="grafica-ley">COBRANZA</i></i>
+                </div>
+            </center>
             <div id="tabla9"></div>
             </div>
         </div>

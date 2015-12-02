@@ -146,18 +146,23 @@ function onSuccess41(data)
                     }
     dibujar13(datos19);
     dibujar52(datos53);
+     $("#tabla7").show();
+   $("#charts3").show();
+    $("#leyenda6").show();
     
 }
 
 function dibujar13(x)
 {
     var ancho= $(window).width();
-    ancho = ancho - 40;
+    ancho = ancho + 40;
     var datos = x;
-    var opciones = {'title':'Facturación, Cobranza y C. Regular',
+    var opciones = {'title':'Facturación, Recaudación y C. Regular',
                     'width':ancho,
                     'backgroundColor':'#eee',
                     'height':300,
+                    backgroundColor:'#F6F6F6',
+                    legend:{position: 'none'},
                     colors: ['#4285F4','#DB4437','#F4B400']};     
     var grafica =   new  google.visualization.ColumnChart(document.getElementById('charts3'));
     grafica.draw(datos,opciones);
@@ -180,12 +185,15 @@ function grafica()
 {
     dibujar13(datos19);
     dibujar52(datos53);
+    $("#leyenda6").show();
+
 }
 
 function actualiza()
 {
    $("#tabla7").hide();
    $("#charts3").hide();
+   $("#leyenda6").hide();
     valida=0;
     verDetalles1();
 }

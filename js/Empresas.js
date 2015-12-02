@@ -9,6 +9,9 @@ var datoscadena1;
 var datoscadena; 
 var datoscadena3; 
 var datoscadena4; 
+var var12 = 0;
+var EmpresaSeleccionad = "";
+var y ="";
 
 function cargarEmpresas()
 {
@@ -65,11 +68,14 @@ function empresasPorFechas()
     if(x1 < 0)
         {
             x1 = 1;
+           // EmpresaSeleccionad = document.getElementById('myselect8').value;
         }
     else
         {
             x1 = x1 +1;
+            //EmpresaSeleccionad = "SATT";
         }
+    EmpresaSeleccionad = empresas2[x1-1];
     $.ajax({
             type: "POST",
             url: "http://land.sedalib.com.pe/moviles/cobranza3.0/Efechas.php",
@@ -132,14 +138,23 @@ function onSuccess76(data)
                             [datos16[2][j],datoscadena[j]]
                             ]);
                     }
-            
-            dibujar234(datos38);
+             y = "Cobranza "+ EmpresaSeleccionad+" A la Fecha Actual";
+            dibujar234(datos38,y);
             
             datoscadena1 = new Array(fechasEmpresa.length);
             
             for(var i=0;i<fechasEmpresa.length;i++)
                 {
-                    datoscadena1[i] = obtenerValor1(String(parseFloat(fechasEmpresa[i])));
+                    if(fechasEmpresa[i] == "")
+                        {
+                            datoscadena1[i] = "0.00";
+                        }
+                    else
+                        {
+                             datoscadena1[i] = obtenerValor1(String(parseFloat(fechasEmpresa[i])));
+                        }
+                    
+                   
                 }
             
              datos381 = new google.visualization.DataTable();
@@ -148,13 +163,15 @@ function onSuccess76(data)
                 for(var j=0;j<fechasEmpresa.length;j++)
                     {
                         datos381.addRows([
-                            [datos16[2][j],datoscadena1[j]]
+                            [ayuda1223[j],datoscadena1[j]]
                             ]);
                     }
+           
             dibujar235(datos381);
              $("#charts6").show();
             $("#tabla9").show();
-            
+            $("#leyenda9").show();
+            var12 = 1;
         }
 }
 
@@ -169,6 +186,7 @@ function empresasMensual()
         {
             x1 = x1 +1;
         }
+    EmpresaSeleccionad = empresas2[x1-1];
     $.ajax({
             type: "POST",
             url: "http://land.sedalib.com.pe/moviles/cobranza3.0/EMensual.php",
@@ -209,7 +227,6 @@ function onSuccess75(data)
                     }
                 }
             
-            
             datoscadena3 = new Array(MEmpresa.length); 
             
             
@@ -229,14 +246,22 @@ function onSuccess75(data)
                             [datos16[2][j],datoscadena3[j]]
                             ]);
                     }
-            
-            dibujar234(datos385);
+            y = "Cobranza "+ EmpresaSeleccionad+" Mensual";
+            dibujar234(datos385,y);
             
             datoscadena4 = new Array(MEmpresa.length);
             
             for(var i=0;i<MEmpresa.length;i++)
                 {
-                    datoscadena4[i] = obtenerValor1(String(parseFloat(MEmpresa[i])));
+                    if(MEmpresa[i] == "")
+                        {
+                            datoscadena4[i] = "0.00";
+                        }
+                    else
+                        {
+                            datoscadena4[i] = obtenerValor1(String(parseFloat(MEmpresa[i])));
+                        }
+                    
                 }
             
              datos386 = new google.visualization.DataTable();
@@ -245,22 +270,29 @@ function onSuccess75(data)
                 for(var j=0;j<MEmpresa.length;j++)
                     {
                         datos386.addRows([
-                            [datos16[2][j],datoscadena4[j]]
+                            [ayuda1223[j],datoscadena4[j]]
                             ]);
                     }
+            
             dibujar235(datos386);
              $("#charts6").show();
             $("#tabla9").show();
+            $("#leyenda9").show();
+            
+            var12 = 1;
         }
 }
 
-function dibujar234 (valor)
+function dibujar234 (valor,y)
 {
     var ancho= $(window).width();
-        var ancho = ancho - 40;
+        var ancho = ancho + 20;
     var datos1= valor;
-    var opciones = {'title':'Cobranza por Empresa',
+    var opciones = {'title':y,
                     'width':ancho,
+                    backgroundColor:'#F6F6F6',
+                    legend:{position: 'none'},
+                    colors: ['#F5821F'],
                     'height':400};     
     grafica3 =  new  google.visualization.ColumnChart(document.getElementById('charts6'));
     grafica3.draw(datos1,opciones);
@@ -279,7 +311,14 @@ function dibujar235 (valor)
 
 function redibujar()
 {
-    dibujar234(datos38);
-    dibujar235(datos381);
+    if(var12 == 0)
+        {
+            alert("Debe graficar por Fechas o Meses antes");
+        }
+    else{
+        dibujar234(datos38);
+        dibujar235(datos381);
+    }
+    
    
 }

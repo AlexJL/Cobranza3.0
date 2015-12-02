@@ -1,5 +1,9 @@
+var montofac;
 function verFacturacion()
 {
+    $("#total-fac").hide();
+    $("#leyenda7").hide();
+    $("#nota").hide();
     document.getElementById('charts').style.display = "none";
     document.getElementById('table1').style.display = "none";
     
@@ -11,34 +15,45 @@ function verFacturacion()
     if(x == 0)
         {
             var dia = f.getDate();
+            if(dia<10)
+                {
+                    dia = "0"+dia;
+                }
             mesfinal = dia+"/"+datos4[0][1];
             mesinicio = "01"+"/"+datos4[0][1];
+            montofac = datos4[1][1];
         }
     else if(x == 1)
         {
             var dia1 = verificarDia(2);
             mesfinal = dia1+"/"+datos4[0][2];
             mesinicio = "01"+"/"+datos4[0][2];
+             montofac = datos4[1][2];
         }
     else if(x == 2)
         {
             var dia1 = verificarDia(3);
             mesinicio = "01/"+datos4[0][3];
             mesfinal = dia1+"/"+datos4[0][3];
+             montofac = datos4[1][3];
         }
     else if(x == 3)
         {
             var dia1 = verificarDia(4);
             mesinicio = "01/"+datos4[0][4];
-            mesfinal = dia1+"/"+datos4[0][3];
+            mesfinal = dia1+"/"+datos4[0][4];
+             montofac = datos4[1][4];
         }
     else{
+        if(dia<10)
+                {
+                    dia = "0"+dia;
+                }
         var dia = f.getDate();
         mesfinal = "01"+"/"+datos4[0][1];
         mesinicio = dia+"/"+datos4[0][1];
+         montofac = datos4[1][1];
     }
-    
-    
     $("#LoadingImage1").show();
     $.ajax({
             type: "POST",
@@ -52,6 +67,7 @@ function verFacturacion()
 
 function onSuccess(data)
 {
+    
     $("#LoadingImage1").hide();
     if(data=="")
         {
@@ -164,18 +180,30 @@ function onSuccess(data)
                          ]);
                     }
                 
+        var porcen = new Array(tam);
+        
         for(var i=1;i<tam+1;i++)
             {
-                datos[2][i] = obtenerValor1(String(datos[2][i]));
+                if(datos[0][i] == "N/CREDITO")
+                    {
+                        porcen[i-1] = "-"+(Math.round(((datos[2][i]*100)/montofac)*100))/100 + "%";
+                        datos[2][i] = "-"+obtenerValor1(String(datos[2][i]));
+                    }
+                else{
+                     porcen[i-1] = (Math.round(((datos[2][i]*100)/montofac)*100))/100 + "%";
+                    datos[2][i] = obtenerValor1(String(datos[2][i]));
+                }
+               
             }
         
         var datos2 = new google.visualization.DataTable();
-                datos2.addColumn('string','Documentos');
-                datos2.addColumn('string','Montos');
+                datos2.addColumn('string','Documento');
+                datos2.addColumn('string','Monto');
+                datos2.addColumn('string','Porcentaje');
                 for(var z = 1;z<tam+1;z++)
                     {
                         datos2.addRows([
-                             [datos[0][z],datos[2][z]]
+                             [datos[0][z],datos[2][z],porcen[z-1]]
                          ]);
                     }
         
@@ -207,11 +235,16 @@ function onSuccess(data)
                     
         
         
-        dibujar(datos1,ancho,grafica1);
-        dibujar1(datos2,ancho);
+        dibujar76(datos1,ancho,grafica1);
+        dibujar176(datos2,ancho);
+        
+        document.getElementById('monto-facturado').innerHTML = obtenerValor1(String(montofac));
         
         document.getElementById('charts').style.display = "block";
-    document.getElementById('table1').style.display = "block";
+        $("#total-fac").show();
+        $("#nota").show();
+        $("#leyenda7").show();
+        document.getElementById('table1').style.display = "block";
        //genera_tabla(datos,tam);
     }
 }
