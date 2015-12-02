@@ -240,6 +240,11 @@ function graficarMontos1()
                     }
             
        // alert(datos16[2][0]);
+            var ayuda1223 = new Array(tam1);
+            for(var i = 0;i <tam1;i++)
+                {
+                    ayuda1223[i] = cargarMeses3(datos4[0][i+1]);
+                }
             
         dibujar3(datos3,ancho,grafica);
             var datos13 = new google.visualization.DataTable();
@@ -251,7 +256,7 @@ function graficarMontos1()
                 for(var j=1;j<tam1+1;j++)
                     {
                         datos13.addRows([
-                            [datos16[2][j-1],datos16[0][j-1],datos16[1][j-1],datos16[4][j-1],datos16[3][j-1]]
+                            [ayuda1223[j-1],datos16[0][j-1],datos16[1][j-1],datos16[4][j-1],datos16[3][j-1]]
                             ]);
                     }
         dibujar4(datos13,ancho);
@@ -446,6 +451,90 @@ function colocar2(cad, cad1)
             cadena = "DIC - ";
         }
     cad1 = cad1;
+    cadena = cadena + cad1;
+    return cadena;
+}
+
+
+function cargarMeses3(valor)
+{
+    
+    var respuesta = "";
+    var cad1 = "";
+    var cad2 = "";
+    var k = 0;
+    for(var i = 0; i<valor.length;i++)
+        {
+            if(valor.charAt(i) != '/' && k==0)
+            {
+                cad1 = cad1 + valor.charAt(i);
+            }
+            else if(valor.charAt(i)  != '/' && k == 1)
+            {
+                cad2 = cad2 + valor.charAt(i);
+            }
+            else if(valor.charAt(i) == '/'){
+                 k++;
+            }
+        }
+    respuesta = colocar3(cad1,cad2);
+    return respuesta;
+}
+
+
+function colocar3(cad, cad1)
+{
+    var cadena = "";
+    if(cad == '01')
+        {
+            cadena = "ENE - ";
+        }
+    else if(cad == '02')
+        {
+            cadena = "FEB - ";
+        }
+    
+    else if(cad == '03')
+        {
+            cadena = "MAR - ";
+        }
+    else if(cad == '04')
+        {
+            cadena = "ABR - ";
+        }
+    else if(cad == '05')
+        {
+            cadena = "MAY - ";
+        }
+    else if(cad == '06')
+        {
+            cadena = "JUN - ";
+        }
+    else if(cad == '07')
+        {
+            cadena = "JUL - ";
+        }
+    else if(cad == '08')
+        {
+            cadena = "AGO - ";
+        }
+    else if(cad == '09')
+        {
+            cadena = "SET - ";
+        }
+    else if(cad == '10')
+        {
+            cadena = "OCT - ";
+        }
+    else if(cad == '11')
+        {
+            cadena = "NOV - ";
+        }
+    else if(cad == '12')
+        {
+            cadena = "DIC - ";
+        }
+    cad1 = "20"+cad1;
     cadena = cadena + cad1;
     return cadena;
 }
